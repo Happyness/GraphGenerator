@@ -7,7 +7,6 @@
     <script src="RadarChart.js"></script>
     <style>
         body {
-            overflow: hidden;
             margin: 0;
             font-size: 14px;
             font-family: "Helvetica Neue", Helvetica;
@@ -19,7 +18,7 @@
             height: 100%;
         }
 
-        #formData {
+        .formData {
             display: block;
             float: left;
             height: 100%;
@@ -27,33 +26,21 @@
     </style>
 </head>
 <body>
+    <form>
+        <label for="title">Title of chart</label>
+        <input type="text" id="title" />
+        <label for="numberOfForms">Number of charts</label>
+        <input type="text" id="numberOfForms" />
+        <label for="numberOfFields">Number of data fields</label>
+        <input type="text" id="numberOfFields" />
+        <input type="submit" value="Add forms" onclick="event.preventDefault(); addForms();" />
+        <input type="submit" value="Generate chart" onclick="event.preventDefault(); generate();" />
+    </form>
+    <div id="dataForms"></div>
     <div id="body">
         <div id="chart"></div>
     </div>
-    <form id="formData">
-        <p><i>Generera graf</i></p>
-        <p>
-            <label for="chartTitle">Title</label>
-            <input id="chartTitle"/>
-        </p>
-        <p>
-            <label for="chartType">Chart title</label>
-            <input id="chartType"/>
-        </p>
-        <p id="fields">
-            <p>
-            <label for="tag[]">Tag</label>
-            <input id="tag[]" name="tag[]" type="text" />
-            <label for="data[]">Data</label>
-            <input id="data[]" name="data[]" type="text" />
-            </p>
-        </p>
-        <p><a href="#" onClick="addField()">Lägg till flera fält</a></p>
-        <p>
-            <input class="generateGraph" type="submit" value="Generera" onclick="event.preventDefault(); generate();" />
-        </p>
-    </form>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
 
 </body>
