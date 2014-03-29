@@ -14,11 +14,11 @@ function generateData(data)
         })
     };
 
-    console.log(d);
+    //console.log(d);
     return d;
 }
 
-function generateGraph(title, legends, data)
+function generateGraph(title, legends, data, bodyId, divId)
 {
     var w = 500,
         h = 500;
@@ -37,13 +37,13 @@ function generateGraph(title, legends, data)
 
     //Call function to draw the Radar chart
     //Will expect that data is in %'s
-    RadarChart.draw("#chart", d, mycfg);
+    RadarChart.draw(divId, d, mycfg);
 
 ////////////////////////////////////////////
 /////////// Initiate legend ////////////////
 ////////////////////////////////////////////
 
-    var svg = d3.select('#body')
+    var svg = d3.select(bodyId)
         .selectAll('svg')
         .append('svg')
         .attr("width", w+300)
@@ -90,8 +90,50 @@ function generateGraph(title, legends, data)
     ;
 }
 
-generateGraph("Personlighet", ['test'], [[
-    {'data': 0.25, 'label': 'cool'},
-    {'data': 0.12, 'label': 'cool2'},
-    {'data': 0.21, 'label': 'joel'}
-]]);
+/*generateGraph("Joel Denke", ['Personlighet', 'Programmering'], [[
+    {'data': 0.7, 'label': 'Självständig'},
+    {'data': 0.8, 'label': 'Kreativ'},
+    {'data': 0.95, 'label': 'Lugn'},
+    {'data': 0.84, 'label': 'Ödmjuk'},
+    {'data': 0.67, 'label': 'Nyfiken'},
+    {'data': 0.89, 'label': 'Lyhörd'}
+]], '#body1', '#chart1');
+
+generateGraph("Programmering", ['Personlighet'], [[
+    {'data': 1, 'label': 'Passionerad'},
+    {'data': 0.95, 'label': 'Kreativ'},
+    {'data': 0.78, 'label': 'Problemlösning'},
+    {'data': 0.9, 'label': 'Noggrann'},
+    {'data': 0.6, 'label': 'Snabb'},
+    {'data': 0.7, 'label': 'Dokumentering'}
+]], '#body2', '#chart2')*/
+
+function generate()
+{
+    console.log("Start generate chart");
+
+    var dataElements = document.getElementsByName("data[]");
+    var tagElements  = document.getElementsByName("tag[]");
+    var data = [];
+
+    for (i=0; i < dataElements.length; i++) {
+        data.push({data: parseFloat(dataElements[i].value), label: tagElements[i].value});
+    }
+
+    var title = document.getElementById("chartTitle").value;
+    var typeLabel = document.getElementById("chartType").value;
+
+    generateGraph(title, [typeLabel], [data], '#body', '#chart');
+}
+
+function addField()
+{
+    var element = '<p>' +
+        '<label for="tag[]">Tag</label>' +
+        '<input id="tag[]" name="tag[]" type="text" />' +
+        '<input id="data[]" name="data[]" type="text" />' +
+        ' <label for="data[]">Data</label>' +
+        '</p>';
+
+    document.getElementById("fields").insertAdjacentHTML("beforeend", element);
+}

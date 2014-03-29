@@ -14,16 +14,45 @@
         }
 
         #chart {
-            position: absolute;
-            top: 50px;
-            left: 100px;
+            display: block;
+            float: right;
+            height: 100%;
+        }
+
+        #formData {
+            display: block;
+            float: left;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-<div id="body">
-    <div id="chart"></div>
-</div>
+    <div id="body">
+        <div id="chart"></div>
+    </div>
+    <form id="formData">
+        <p><i>Generera graf</i></p>
+        <p>
+            <label for="chartTitle">Title</label>
+            <input id="chartTitle"/>
+        </p>
+        <p>
+            <label for="chartType">Chart title</label>
+            <input id="chartType"/>
+        </p>
+        <p id="fields">
+            <p>
+            <label for="tag[]">Tag</label>
+            <input id="tag[]" name="tag[]" type="text" />
+            <label for="data[]">Data</label>
+            <input id="data[]" name="data[]" type="text" />
+            </p>
+        </p>
+        <p><a href="#" onClick="addField()">Lägg till flera fält</a></p>
+        <p>
+            <input class="generateGraph" type="submit" value="Generera" onclick="event.preventDefault(); generate();" />
+        </p>
+    </form>
 
 <script type="text/javascript" src="script.js"></script>
 
